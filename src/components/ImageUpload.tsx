@@ -35,10 +35,11 @@ export const ImageUpload = ({ children }: PropsWithChildren) => {
     <div className="relative bg-white">
       <div className="absolute bottom-4 right-4 z-10">
         <Button
+          size="sm"
           disabled={upload.isLoading}
           onClick={() => ref.current?.click()}
         >
-          <ImagePlus className="h-6 w-6" />
+          <ImagePlus className="h-4 w-4" />
         </Button>
 
         <input

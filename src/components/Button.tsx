@@ -9,20 +9,15 @@ const button = tv({
       dark: "bg-stone-800 text-stone-50",
     },
     size: {
-      sm: "text-sm",
-      md: "text-base",
+      sm: "p-2 text-sm",
+      md: "px-3 py-2 text-base",
       lg: "px-4 py-3 text-lg",
     },
     disabled: {
       true: "opacity-50 pointer-events-none",
     },
   },
-  compoundVariants: [
-    {
-      size: ["sm", "md"],
-      class: "px-4 py-3",
-    },
-  ],
+  compoundVariants: [],
   defaultVariants: {
     size: "md",
     color: "default",

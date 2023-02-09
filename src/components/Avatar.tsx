@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import { createComponent } from "components";
 
 const avatar = tv({
-  base: "rounded bg-yellow-300 border-yellow-400 relative",
+  base: "rounded bg-cyan-300 border-cyan-400 relative",
   variants: {
     size: {
       sm: "",
