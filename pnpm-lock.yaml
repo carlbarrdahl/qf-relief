@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@hookform/resolvers': ^2.9.11
   '@rainbow-me/rainbowkit': ^0.8.1
   '@tailwindcss/typography': ^0.5.9
   '@types/node': ^18.11.18
@@ -22,6 +23,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.1
   react: 18.2.0
   react-dom: 18.2.0
+  react-hook-form: ^7.43.1
   react-markdown: ^8.0.5
   tailwind-merge: ^1.9.1
   tailwind-variants: ^0.0.29
@@ -32,6 +34,7 @@ specifiers:
   zod: ^3.20.2
 
 dependencies:
+  '@hookform/resolvers': 2.9.11_react-hook-form@7.43.1
   '@rainbow-me/rainbowkit': 0.8.1_xifkpxtiaarv22tmj3akgrrgyu
   class-variance-authority: 0.4.0_typescript@4.9.5
   clsx: 1.2.1
@@ -40,12 +43,13 @@ dependencies:
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.43.1_react@18.2.0
   react-markdown: 8.0.5_3stiutgnnbnfnf3uowm5cip22i
   tailwind-merge: 1.9.1
   tailwind-variants: 0.0.29_tailwindcss@3.2.6
   tailwindcss-animate: 1.0.5_tailwindcss@3.2.6
-  wagmi: 0.11.5_xgjut2briwhlawdy2jp5aqimva
-  zod: 3.20.5
+  wagmi: 0.11.5_idwm6wzhziisfqiuv5i2mub7ai
+  zod: 3.20.6
 
 devDependencies:
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.6
@@ -529,6 +533,14 @@ packages:
       '@ethersproject/strings': 5.7.0
     dev: false
 
+  /@hookform/resolvers/2.9.11_react-hook-form@7.43.1:
+    resolution: {integrity: sha512-bA3aZ79UgcHj7tFV7RlgThzwSSHZgvfbt2wprldRkYBcMopdMvHyO17Wwp/twcJasNFischFfS7oz8Katz8DdQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.43.1_react@18.2.0
+    dev: false
+
   /@humanwhocodes/config-array/0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
     engines: {node: '>=10.10.0'}
@@ -864,7 +876,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-remove-scroll: 2.5.4_3stiutgnnbnfnf3uowm5cip22i
-      wagmi: 0.11.5_xgjut2briwhlawdy2jp5aqimva
+      wagmi: 0.11.5_idwm6wzhziisfqiuv5i2mub7ai
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -1407,7 +1419,7 @@ packages:
       typescript: 4.9.5
     dev: false
 
-  /@wagmi/connectors/0.2.5_nsuivoxz4pvzkzap4brw3ws4aq:
+  /@wagmi/connectors/0.2.5_fjv2bkywjfwrc42h4rui6ebg3u:
     resolution: {integrity: sha512-saS5wps+R5SCs4ka9BG4vlaS4xDKn8GRt5y/f6v8RYBhat+H+3DGBowwGLN/OLtu744VKY8sIsm8/GRy2tXbsg==}
     peerDependencies:
       '@wagmi/core': '>=0.9.x'
@@ -1423,11 +1435,11 @@ packages:
       '@ledgerhq/connect-kit-loader': 1.0.2
       '@safe-global/safe-apps-provider': 0.15.2
       '@safe-global/safe-apps-sdk': 7.9.0
-      '@wagmi/core': 0.9.5_5yibk6ahakmdfqkxg3stbalqu4
+      '@wagmi/core': 0.9.5_zksa3pqhbwcpfpig4odjhdkovq
       '@walletconnect/ethereum-provider': 1.8.0
       '@walletconnect/universal-provider': 2.3.3_4bewfcp2iebiwuold25d6rgcsy
       '@web3modal/standalone': 2.1.1_react@18.2.0
-      abitype: 0.3.0_rfsppoe7ibaizicl6vrhqtz2ua
+      abitype: 0.3.0_smsy4negu7uja64s32ifnoozrm
       ethers: 5.7.2
       eventemitter3: 4.0.7
       typescript: 4.9.5
@@ -1447,7 +1459,7 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core/0.9.5_5yibk6ahakmdfqkxg3stbalqu4:
+  /@wagmi/core/0.9.5_zksa3pqhbwcpfpig4odjhdkovq:
     resolution: {integrity: sha512-Ff4ejQbeexH5pfcYbwYusvxcYUY1+AuKCqHyYLliOQChLvymK7QGth7Hh7lKEf1Js/g4ktHHI07EfLKHEiDYWw==}
     peerDependencies:
       ethers: '>=5.5.1 <6'
@@ -1457,8 +1469,8 @@ packages:
         optional: true
     dependencies:
       '@wagmi/chains': 0.2.7_typescript@4.9.5
-      '@wagmi/connectors': 0.2.5_nsuivoxz4pvzkzap4brw3ws4aq
-      abitype: 0.3.0_rfsppoe7ibaizicl6vrhqtz2ua
+      '@wagmi/connectors': 0.2.5_fjv2bkywjfwrc42h4rui6ebg3u
+      abitype: 0.3.0_smsy4negu7uja64s32ifnoozrm
       ethers: 5.7.2
       eventemitter3: 4.0.7
       typescript: 4.9.5
@@ -1945,7 +1957,7 @@ packages:
       through: 2.3.8
     dev: false
 
-  /abitype/0.3.0_rfsppoe7ibaizicl6vrhqtz2ua:
+  /abitype/0.3.0_smsy4negu7uja64s32ifnoozrm:
     resolution: {integrity: sha512-0YokyAV4hKMcy97Pl+6QgZBlBdZJN2llslOs7kiFY+cu7kMlVXDBpxMExfv0krzBCQt2t7hNovpQ3y/zvEm18A==}
     engines: {pnpm: '>=7'}
     peerDependencies:
@@ -1956,7 +1968,7 @@ packages:
         optional: true
     dependencies:
       typescript: 4.9.5
-      zod: 3.20.5
+      zod: 3.20.6
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.2:
@@ -5291,6 +5303,15 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-hook-form/7.43.1_react@18.2.0:
+    resolution: {integrity: sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -6216,7 +6237,7 @@ packages:
       vfile-message: 3.1.4
     dev: false
 
-  /wagmi/0.11.5_xgjut2briwhlawdy2jp5aqimva:
+  /wagmi/0.11.5_idwm6wzhziisfqiuv5i2mub7ai:
     resolution: {integrity: sha512-dd7UMMXm52K4auDdJ09PzCAHagV51G2xag92Y+vz+LUCGg/UKFqZObMywFY6SsTIpse0XMPsvmaR1FQeF5FOIw==}
     peerDependencies:
       ethers: '>=5.5.1 <6'
@@ -6229,8 +6250,8 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.24.4
       '@tanstack/react-query': 4.24.4_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-persist-client': 4.24.4_pbzrecrhgj7fe7hddoo6lp43hu
-      '@wagmi/core': 0.9.5_5yibk6ahakmdfqkxg3stbalqu4
-      abitype: 0.3.0_rfsppoe7ibaizicl6vrhqtz2ua
+      '@wagmi/core': 0.9.5_zksa3pqhbwcpfpig4odjhdkovq
+      abitype: 0.3.0_smsy4negu7uja64s32ifnoozrm
       ethers: 5.7.2
       react: 18.2.0
       typescript: 4.9.5
@@ -6509,8 +6530,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  /zod/3.20.5:
-    resolution: {integrity: sha512-BTAAliwfoB9dWf2hC+TXlyWKk/YTqRGZjHQR0WLC2A2pzierWo7KuQ1ebjS4SNaFaxg/lDItzl9/QTgLjcHbgw==}
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
     dev: false
 
   /zustand/4.3.2_react@18.2.0:
