@@ -9,6 +9,7 @@ import {
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 
 import { mainnet, goerli } from "wagmi/chains";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../styles/globals.css";
 
@@ -23,21 +24,24 @@ const { chains, provider } = configureChains(
 
 const { connectors } = getDefaultWallets({ appName: site.title, chains });
 
+const queryClient = new QueryClient();
 const wagmiClient = createClient({ autoConnect: true, connectors, provider });
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={lightTheme({
-          accentColor: "#1c1917",
-          borderRadius: "medium",
-        })}
-      >
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <QueryClientProvider client={queryClient}>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider
+          chains={chains}
+          theme={lightTheme({
+            accentColor: "#1c1917",
+            borderRadius: "medium",
+          })}
+        >
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </QueryClientProvider>
   );
 };
 

@@ -66,7 +66,7 @@ const CreateRoundPage: NextPage = () => {
             <FormControl
               name="receiver"
               label="Receiving wallet address"
-              hint="Address donations will be sent to"
+              hint="Donations will be sent to this wallet"
             >
               <Input placeholder="0x..." />
             </FormControl>

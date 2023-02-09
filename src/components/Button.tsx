@@ -13,6 +13,9 @@ const button = tv({
       md: "text-base",
       lg: "px-4 py-3 text-lg",
     },
+    disabled: {
+      true: "opacity-50 pointer-events-none",
+    },
   },
   compoundVariants: [
     {
