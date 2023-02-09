@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 import { createComponent } from "components";
 import Image from "next/image";
 
-const banner = tv({ base: "h-96 bg-yellow-500" });
+const banner = tv({ base: "h-96 bg-yellow-500 relative" });
 
 const Wrapper = createComponent("div", banner);
 

@@ -9,13 +9,14 @@ import { Avatar } from "components/Avatar";
 import { Container } from "components/Container";
 import { Banner } from "components/Banner";
 import { notImplemented } from "utils/notImplemented";
+import { round } from "data/mock";
 
 const ViewRoundPage: NextPage = () => {
   return (
     <Layout>
-      <Banner />
+      <Banner src={round.bannerImg} />
       <Container className="-mt-24 mb-16 flex items-end gap-4">
-        <Avatar size="lg" />
+        <Avatar size="lg" src={round.logoImg} />
         <div className="flex flex-1 justify-between">
           <div>
             <h2 className="m-0 text-4xl font-bold">Round Title</h2>
