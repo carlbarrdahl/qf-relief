@@ -10,12 +10,22 @@ import { Container } from "components/Container";
 import { Banner } from "components/Banner";
 import { notImplemented } from "utils/notImplemented";
 import { round } from "data/mock";
+import { ConnectWalletButton } from "components/ConnectWalletButton";
 
+const DonateButton = () => {
+  return (
+    <ConnectWalletButton label="Connect Wallet to Donate">
+      <Button onClick={notImplemented} as={NextLink} href="#" color="dark">
+        Donate to project
+      </Button>
+    </ConnectWalletButton>
+  );
+};
 const ViewRoundPage: NextPage = () => {
   return (
     <Layout>
       <Banner src={round.bannerImg} />
-      <Container className="-mt-24 mb-16 flex items-end gap-4">
+      <Container className="-mt-24 flex items-end gap-4">
         <Avatar size="lg" src={round.logoImg} />
         <div className="flex flex-1 justify-between">
           <div>
@@ -25,14 +35,7 @@ const ViewRoundPage: NextPage = () => {
             </Link>
           </div>
           <div>
-            <Button
-              onClick={notImplemented}
-              as={NextLink}
-              href="#"
-              color="dark"
-            >
-              Donate to project
-            </Button>
+            <DonateButton />
           </div>
         </div>
       </Container>
