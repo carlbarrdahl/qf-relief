@@ -2,7 +2,7 @@ import { createComponent } from "components";
 import { tv } from "tailwind-variants";
 
 const button = tv({
-  base: "bg-stone-900 tracking-wide text-stone-50 rounded-md active:opacity-90 transition-colors",
+  base: "inline-flex items-center bg-stone-900 tracking-wide text-stone-50 rounded-md active:opacity-90 transition-colors",
   variants: {
     color: {
       default: "bg-stone-200 hover:bg-stone-300 text-stone-900",

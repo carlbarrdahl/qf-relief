@@ -2,7 +2,7 @@ import { createComponent } from "components";
 import { tv } from "tailwind-variants";
 
 const avatar = tv({
-  base: "rounded bg-stone-300",
+  base: "rounded bg-yellow-300 border-8 border-yellow-400",
   variants: {
     size: {
       sm: "",
@@ -16,4 +16,4 @@ const avatar = tv({
   },
 });
 
-export const Avatar = createComponent("avatar", avatar);
+export const Avatar = createComponent("div", avatar);

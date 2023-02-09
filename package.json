@@ -10,13 +10,17 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^0.8.1",
+    "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "ethers": "^5.7.2",
+    "lucide-react": "^0.112.0",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.5",
+    "tailwind-merge": "^1.9.1",
     "tailwind-variants": "^0.0.29",
+    "tailwindcss-animate": "^1.0.5",
     "wagmi": "^0.11.5",
     "zod": "^3.20.2"
   },

@@ -1,4 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Link } from "components/Link";
 import site from "config/site";
 import Head from "next/head";
 import { PropsWithChildren } from "react";
@@ -6,8 +7,8 @@ import { PropsWithChildren } from "react";
 const Header = () => {
   return (
     <header className="flex items-center justify-between p-2">
-      <div className="text-xs font-bold uppercase tracking-wider">
-        QF Relief
+      <div className="flex items-center gap-8">
+        <div className="text-xs font-bold  tracking-wider">QF relief</div>
       </div>
       <ConnectButton />
     </header>
@@ -23,7 +24,8 @@ export const Layout = (props: PropsWithChildren) => {
       </Head>
       <main className="bg-stone-50 text-stone-800">
         <Header />
-        <div className="">{props.children}</div>
+        <div className="pb-24">{props.children}</div>
+        <footer className=" py-24"></footer>
       </main>
     </>
   );
