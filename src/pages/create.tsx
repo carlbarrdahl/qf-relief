@@ -18,11 +18,12 @@ const ImageUpload = ({ children }: { children: ReactElement }) => {
   return (
     <div className="relative">
       <div className="absolute bottom-4 right-4">
-        {/* <Button  onClick={() => ref.current?.click()}> */}
-        <div className="flex cursor-pointer items-center justify-center rounded bg-white p-2 text-stone-800">
+        <div
+          onClick={() => ref.current?.click()}
+          className="flex cursor-pointer items-center justify-center rounded bg-white p-2 text-stone-800"
+        >
           <ImagePlus className="h-6 w-6" />
         </div>
-        {/* </Button> */}
 
         <input
           onChange={(e) => {
