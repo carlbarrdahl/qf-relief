@@ -21,10 +21,9 @@ export const Layout = (props: PropsWithChildren) => {
         <meta name="description" content={site.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col bg-stone-50 text-stone-800">
+      <main className="bg-stone-50 text-stone-800">
         <Header />
-        <div className="flex-1">{props.children}</div>
-        <footer className=" bg-stone-900 p-32"></footer>
+        <div className="">{props.children}</div>
       </main>
     </>
   );
