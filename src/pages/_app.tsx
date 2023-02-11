@@ -8,7 +8,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 
-import { mainnet, goerli } from "wagmi/chains";
+import { mainnet, goerli, optimism } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../styles/globals.css";
@@ -18,7 +18,7 @@ import site from "config/site";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [mainnet, goerli],
+  [mainnet, goerli, optimism],
   [publicProvider()]
 );
 

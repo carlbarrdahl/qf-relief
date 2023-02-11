@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const RoundSchema = z.object({
   title: z.string().min(3),
-  website: z.string().url({ message: "Must be a valid URL" }).nullable(),
+  website: z
+    .string()
+    .nullable()
+    .or(z.string().url({ message: "Must be a valid URL" })),
   description: z.string().nullable(),
   logoImg: z.string().nullish(), // ipfs hash
   bannerImg: z.string().nullish(), // ipfs hash

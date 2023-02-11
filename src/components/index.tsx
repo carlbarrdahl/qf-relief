@@ -4,13 +4,7 @@ import {
   ReactNode,
   ElementType,
 } from "react";
-import {
-  TV,
-  TVProps,
-  TVReturnProps,
-  TVReturnType,
-  TVSlots,
-} from "tailwind-variants";
+import { TVReturnType, TVSlots } from "tailwind-variants";
 
 export type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>["ref"];
@@ -40,6 +34,5 @@ export const createComponent = (
       );
     }
   );
-  // Comp.displayName = tag;
   return Comp;
 };

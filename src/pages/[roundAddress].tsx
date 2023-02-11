@@ -53,7 +53,27 @@ Some description about the project
 - Go here
         `}</Markdown>
       </Container>
+      <Container>{/* <ProjectsList /> */}</Container>
     </Layout>
+  );
+};
+
+const ProjectsList = () => {
+  return (
+    <div className="flex gap-4 py-24">
+      {Array.from({ length: 4 }, (v, i) => ({
+        projectId: i + 1,
+        title: "Project " + i + 1,
+      })).map((project) => (
+        <div key={project.projectId} className="w-48 rounded shadow-xl">
+          <Avatar className="h-24 w-full" />
+          <div className="p-4">
+            <div className="">{project.title}</div>
+            <div className="text-sm text-gray-600">{"description..."}</div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
