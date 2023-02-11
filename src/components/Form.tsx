@@ -1,8 +1,15 @@
 import { cloneElement, PropsWithChildren, ReactElement } from "react";
-import { useFormContext } from "react-hook-form";
+import {
+  FormProvider,
+  UseFormProps,
+  useFormContext,
+  useForm,
+} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { tv } from "tailwind-variants";
 
 import { createComponent } from "components";
+import { z } from "zod";
 
 const input = tv({
   base: "block w-full p-2 border border-stone-200 focus:outline-yellow-500",
@@ -41,3 +48,27 @@ export const FormControl = ({
     </fieldset>
   );
 };
+
+export interface FormProps<S extends z.ZodType<any, any>>
+  extends PropsWithChildren {
+  defaultValues?: UseFormProps<z.infer<S>>["defaultValues"];
+  schema: S;
+  onSubmit: (values: z.infer<S>) => void;
+}
+
+export function Form<S extends z.ZodType<any, any>>({
+  defaultValues,
+  schema,
+  children,
+  onSubmit,
+}: FormProps<S>) {
+  // Initialize the form with defaultValues and schema for validation
+  const form = useForm({ defaultValues, resolver: zodResolver(schema) });
+  // Pass the form methods to a FormProvider. This lets us access the form from components without passing props.
+  console.log(form.watch());
+  return (
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>{children}</form>
+    </FormProvider>
+  );
+}

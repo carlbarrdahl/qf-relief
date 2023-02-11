@@ -11,23 +11,38 @@ import clsx from "clsx";
 import { ImagePlus } from "lucide-react";
 import { useMutation } from "wagmi";
 import { Button } from "./Button";
+import { ipfsUpload } from "utils/ipfs";
+import { useFormContext } from "react-hook-form";
+import { createGlobalState } from "react-use";
 
-export const ImageUpload = ({ children }: PropsWithChildren) => {
+export const useIsUploading = createGlobalState<boolean>(false);
+
+export const ImageUpload = ({
+  name,
+  children,
+}: { name: string } & PropsWithChildren) => {
   const ref = useRef<HTMLInputElement>(null);
   const [src, setSrc] = useState("");
+  const { setValue } = useFormContext();
 
-  const upload = useMutation(
-    (file: File) =>
-      new Promise((r) => {
-        setTimeout(() => r({ ipfsHash: "hash" }), 3000);
-      })
-  );
+  const [_, setUploading] = useIsUploading();
+  const upload = useMutation(async (file: File) => {
+    setUploading(true);
+    return ipfsUpload(file).then((cid) => {
+      setUploading(false);
+      return cid;
+    });
+  });
 
   const handleUpload = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const [file] = e.target.files || [];
     if (file) {
       setSrc(URL.createObjectURL(file));
-      upload.mutate(file);
+      upload.mutate(file, {
+        onSuccess: (cid) => {
+          setValue(name, `ipfs://${cid}`);
+        },
+      });
     }
   }, []);
 

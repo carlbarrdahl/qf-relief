@@ -5,14 +5,17 @@ import { useContractConfig } from "./useContractConfig";
 import { encodeParameters, encodeTypes } from "utils/encodeParameters";
 import { useEffect } from "react";
 import { ipfsUpload } from "utils/ipfs";
+import { z } from "zod";
+import { RoundSchema } from "schemas/round";
 
 type Metadata = {
-  title: "string";
-  description: "string";
-  logoImg: "string";
-  bannerImg: "string";
+  title: string;
+  description?: string;
+  logoImg?: string;
+  bannerImg?: string;
 };
 
+type RoundMetadata = z.infer<typeof RoundSchema>;
 type address = `0x${string}`;
 type RoundCreate = {
   votingStrategy: address;
@@ -56,36 +59,39 @@ export const useCreateRound = ({
     }
   }, [tx.data]);
 
-  return useMutation(async (round: RoundCreate) => {
+  return useMutation(async (round: z.infer<typeof RoundSchema>) => {
+    console.log("Round", round);
+
     return Promise.all([
       ipfsUpload(round.roundMeta),
       ipfsUpload(round.applicationMeta),
     ]).then(([roundMetaCid, applicationMetaCid]) => {
+      console.log("Uploaded", roundMetaCid, applicationMetaCid);
+      const params = encodeParameters(
+        encodeTypes.round,
+        Object.values({
+          votingStrategy: round.votingStrategy,
+          payoutStrategy: round.payoutStrategy,
+          applicationsStartTime: round.applicationsStartTime,
+          applicationsEndTime: round.applicationsEndTime,
+          roundStartTime: round.roundStartTime,
+          roundEndTime: round.roundEndTime,
+          roundMetaPtr: {
+            protocol: protocols.ipfs,
+            pointer: roundMetaCid,
+          },
+          applicationMetaPtr: {
+            protocol: protocols.ipfs,
+            pointer: applicationMetaCid,
+          },
+          token: round.token,
+          adminRoles: [],
+          roundOperators: [],
+        })
+      );
+      console.log("params", params);
       write?.({
-        recklesslySetUnpreparedArgs: [
-          encodeParameters(
-            encodeTypes.round,
-            Object.values({
-              votingStrategy: round.votingStrategy,
-              payoutStrategy: round.payoutStrategy,
-              applicationsStartTime: round.applicationsStartTime,
-              applicationsEndTime: round.applicationsEndTime,
-              roundStartTime: round.roundStartTime,
-              roundEndTime: round.roundEndTime,
-              roundMetaPtr: {
-                protocol: protocols.ipfs,
-                pointer: roundMetaCid,
-              },
-              applicationMetaPtr: {
-                protocol: protocols.ipfs,
-                pointer: applicationMetaCid,
-              },
-              token: round.token,
-              adminRoles: [],
-              roundOperators: [],
-            })
-          ),
-        ],
+        recklesslySetUnpreparedArgs: [params],
       });
     });
   });

@@ -1,6 +1,9 @@
 import { useNetwork } from "wagmi";
 import { contractConfig, ContractNames } from "config/contracts";
 
+type address = `0x${string}`;
+
+type ReturnType = { abi: string[]; address: address };
 export const useContractConfig = (name: ContractNames) => {
   const { chain } = useNetwork();
 
@@ -11,7 +14,8 @@ export const useContractConfig = (name: ContractNames) => {
     } = contractConfig[name];
 
     console.log(address, abi);
-    return { abi, address };
+    return { abi, address } as ReturnType;
   }
-  return {};
+
+  return {} as ReturnType;
 };

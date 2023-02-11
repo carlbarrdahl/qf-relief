@@ -3,29 +3,44 @@ import { Button } from "components/Button";
 import { Avatar } from "components/Avatar";
 import { Container } from "components/Container";
 import { Banner } from "components/Banner";
-import { notImplemented } from "utils/notImplemented";
-import { FormProvider, useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RoundSchema } from "schemas/round";
-import { ImageUpload } from "components/ImageUpload";
-import { FormControl, Input, Textarea } from "components/Form";
+import { roundFormConfig, RoundSchema } from "schemas/round";
+import { ImageUpload, useIsUploading } from "components/ImageUpload";
+import { Form, FormControl, Input, Textarea } from "components/Form";
 
 import { useCreateRound } from "hooks/useCreateRound";
 import { useRouter } from "next/router";
 
-const testRound = {
-  title: "Test Round",
-  description: "Test Round description",
-  receiver: "0xebFe5cDeb871B3b99f7194d84A63314622dAe709",
-  website: "",
+const testRound = RoundSchema.parse({
+  roundMeta: {
+    title: "Test Round",
+    description: "Test Round description",
+    receiver: "0xebFe5cDeb871B3b99f7194d84A63314622dAe709",
+    website: "",
+    logoImg: "",
+    bannerImg: "",
+  },
+});
+
+const RoundDetails = () => {
+  const { watch } = useFormContext();
+  return (
+    <div>
+      <h2 className="m-0 h-10 text-4xl font-bold">
+        {watch("roundMeta.title")}
+      </h2>
+      <div className="h-6">
+        <Link href="#" target={"_blank"}>
+          {watch("roundMeta.website")}
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export const CreateRoundForm = () => {
-  const form = useForm({
-    defaultValues: testRound,
-    resolver: zodResolver(RoundSchema),
-  });
+  const [isUploading, setUploading] = useIsUploading();
 
   const router = useRouter();
   const create = useCreateRound({
@@ -33,64 +48,56 @@ export const CreateRoundForm = () => {
     // onError: ({ message }) => toast.open({ type: "error", message })
   });
 
-  console.log(create);
+  console.log("isUploading", isUploading);
 
+  const isLoading = isUploading || create.isLoading;
   return (
-    <FormProvider {...form}>
-      <form
-        onSubmit={form.handleSubmit((values) => {
-          console.log("form", values);
-          // notImplemented();
-        })}
-      >
-        <ImageUpload>
-          <Banner />
+    <Form
+      defaultValues={testRound}
+      schema={RoundSchema}
+      onSubmit={(values) => {
+        console.log(values);
+        create.mutate(values);
+      }}
+    >
+      <ImageUpload name="bannerImg">
+        <Banner />
+      </ImageUpload>
+      <Container className="-mt-24 mb-16 flex items-end gap-4">
+        <ImageUpload name="logoImg">
+          <Avatar size="lg" />
         </ImageUpload>
-        <Container className="-mt-24 mb-16 flex items-end gap-4">
-          <ImageUpload>
-            <Avatar size="lg" />
-          </ImageUpload>
-          <div className="flex flex-1 justify-between">
-            <div>
-              <h2 className="m-0 h-10 text-4xl font-bold">
-                {form.watch("title")}
-              </h2>
-              <div className="h-6">
-                <Link href="#" target={"_blank"}>
-                  {form.watch("website")}
-                </Link>
-              </div>
-            </div>
-            <div>
-              <Button type="submit" color="dark">
-                Create round
-              </Button>
-            </div>
+        <div className="flex flex-1 justify-between">
+          <RoundDetails />
+          <div>
+            <Button type="submit" color="dark" disabled={isLoading}>
+              Create round
+            </Button>
           </div>
-        </Container>
+        </div>
+      </Container>
 
-        <Container>
-          <FormControl name="title" label="Project title">
-            <Input placeholder="Round name..." />
-          </FormControl>
-          <FormControl name="website" label="Website">
-            <Input placeholder="https://..." />
-          </FormControl>
-          <FormControl name="target" label="Raise target">
-            <Input type="number" placeholder="$25000" />
-          </FormControl>
-          <FormControl
-            name="receiver"
-            label="Receiving wallet address"
-            hint="Donations will be sent to this wallet"
-          >
-            <Input placeholder="0x..." />
-          </FormControl>
-          <FormControl name="description" label="Description">
-            <Textarea rows={10} />
-          </FormControl>
-        </Container>
-      </form>
-    </FormProvider>
+      <Container>
+        <FormControl name="roundMeta.title" label="Project title">
+          <Input placeholder="Round name..." {...roundFormConfig.title} />
+        </FormControl>
+        <FormControl name="roundMeta.website" label="Website">
+          <Input placeholder="https://..." />
+        </FormControl>
+        <FormControl name="roundMeta.target" label="Raise target">
+          <Input type="number" placeholder="$25000" />
+        </FormControl>
+        <FormControl
+          name="roundMeta.receiver"
+          label="Receiving wallet address"
+          hint="Donations will be sent to this wallet"
+        >
+          <Input placeholder="0x..." />
+        </FormControl>
+        <FormControl name="roundMeta.description" label="Description">
+          <Textarea rows={10} />
+        </FormControl>
+      </Container>
+    </Form>
   );
 };
