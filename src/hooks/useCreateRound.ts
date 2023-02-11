@@ -8,29 +8,6 @@ import { ipfsUpload } from "utils/ipfs";
 import { z } from "zod";
 import { RoundSchema } from "schemas/round";
 
-type Metadata = {
-  title: string;
-  description?: string;
-  logoImg?: string;
-  bannerImg?: string;
-};
-
-type RoundMetadata = z.infer<typeof RoundSchema>;
-type address = `0x${string}`;
-type RoundCreate = {
-  votingStrategy: address;
-  payoutStrategy: address;
-  applicationsStartTime: number;
-  applicationsEndTime: number;
-  roundStartTime: number;
-  roundEndTime: number;
-  token: address;
-  roundMeta: Metadata;
-  applicationMeta: Metadata;
-  adminRoles: address[];
-  roundOperators: address[];
-};
-
 export const protocols = { ipfs: 1 };
 
 export const useCreateRound = ({
