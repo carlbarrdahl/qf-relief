@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { Layout } from "layouts";
-import { CreateRoundForm } from "components/CreateRoundForm";
+import { CreateRoundForm } from "features/create-round/components/CreateRoundForm";
 
 const CreateRoundPage: NextPage = () => {
   return (

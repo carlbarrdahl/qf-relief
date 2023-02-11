@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 
-import { useContractConfig } from "./useContractConfig";
+import { useContractConfig } from "../../../hooks/useContractConfig";
 import { encodeParameters, encodeTypes } from "utils/encodeParameters";
 import { useEffect } from "react";
 import { ipfsUpload } from "utils/ipfs";
