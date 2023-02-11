@@ -13,7 +13,6 @@ export const useContractConfig = (name: ContractNames) => {
       address: { [chain.id]: address },
     } = contractConfig[name];
 
-    console.log(address, abi);
     return { abi, address } as ReturnType;
   }
 

@@ -49,6 +49,7 @@ export const CreateRoundForm = () => {
   });
 
   console.log("isUploading", isUploading);
+  console.log("create", create);
 
   const isLoading = isUploading || create.isLoading;
   return (
@@ -78,6 +79,11 @@ export const CreateRoundForm = () => {
       </Container>
 
       <Container>
+        {create.error ? (
+          <pre className="text-red-500">
+            {JSON.stringify(create.error, null, 2)}
+          </pre>
+        ) : null}
         <FormControl name="roundMeta.title" label="Project title">
           <Input placeholder="Round name..." {...roundFormConfig.title} />
         </FormControl>

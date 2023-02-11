@@ -23,14 +23,14 @@ export const RoundMetaSchema = z.object({
 
 export const ApplicationMetaSchema = z.object({});
 
+const today = () => Math.floor(Date.now() / 1000);
+const ONE_MONTH = 60 * 60 * 24 * 30;
+
 export const RoundSchema = z.object({
-  votingStrategy: z.string().default("0x"),
-  payoutStrategy: z.string().default("0x"),
-  applicationsStartTime: z.string().default(""),
-  applicationsEndTime: z.string().default(""),
-  roundStartTime: z.string().default(""),
-  roundEndTime: z.string().default(""),
-  token: z.string().default("0x"),
+  applicationsStartTime: z.number().default(today()),
+  applicationsEndTime: z.number().default(today() + ONE_MONTH),
+  roundStartTime: z.number().default(today()),
+  roundEndTime: z.number().default(today() + ONE_MONTH),
   roundMeta: RoundMetaSchema,
   applicationMeta: ApplicationMetaSchema.default({}),
   adminRoles: z.array(z.string()).default([]),
