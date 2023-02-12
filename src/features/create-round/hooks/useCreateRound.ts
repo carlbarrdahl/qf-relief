@@ -12,30 +12,27 @@ import { useEffect } from "react";
 import { ipfsUpload } from "utils/ipfs";
 import { z } from "zod";
 import { RoundSchema } from "schemas/round";
+import { ethers } from "ethers";
 
 export const protocols = { ipfs: 1 };
 
-export const useDeployPayout = () => {
-  const deployer = useContractConfig("Deployer");
-  const { address: payoutStrategy } = useContractConfig("MerklePayoutContract");
+type Callbacks = { onSuccess?({ address }: { address: string }): void };
 
-  const { config } = usePrepareContractWrite({
-    address: deployer.address,
-    abi: deployer.abi,
-    args: [payoutStrategy],
-  });
-
-  return useContractWrite(config);
+const parseEventArgs = (
+  { logs }: ethers.providers.TransactionReceipt,
+  abi: string[]
+) => {
+  const iface = new ethers.utils.Interface(abi);
+  return logs.map(iface.parseLog).map((log) => log.args);
 };
-export const useCreateRound = ({
-  onSuccess,
-}: {
-  onSuccess?({ address }: { address: string }): void;
-}) => {
+
+export const useDeployPayout = ({ onSuccess }: Callbacks) => {
+  return;
+};
+export const useCreateRound = ({ onSuccess }: Callbacks) => {
   const account = useAccount();
   const factory = useContractConfig("RoundFactory");
   const { address: votingStrategy } = useContractConfig("QFVotingContract");
-  const { address: payoutStrategy } = useContractConfig("MerklePayoutContract");
   const { address: token } = useContractConfig("USDCToken");
 
   const create = useContractWrite({
@@ -44,6 +41,8 @@ export const useCreateRound = ({
     functionName: "create",
     mode: "recklesslyUnprepared",
   });
+
+  const payout = useDeployPayout({ onSuccess: (deployed) => {} });
 
   const tx = useWaitForTransaction({
     hash: create.data?.hash,
@@ -60,10 +59,12 @@ export const useCreateRound = ({
   }, [tx.data]);
 
   return useMutation(async (round: z.infer<typeof RoundSchema>) => {
+    console.log("Deploy payout", payout);
+
     console.log("Round", round);
     console.log("Voting", votingStrategy);
-    console.log("Payment", payoutStrategy);
     console.log("Account", account);
+
     return Promise.all([
       ipfsUpload(round.roundMeta),
       ipfsUpload(round.applicationMeta),
@@ -74,7 +75,7 @@ export const useCreateRound = ({
         Object.values({
           // Order matters
           votingStrategy,
-          payoutStrategy,
+          payoutStrategy: round.payoutStrategy,
           applicationsStartTime: round.applicationsStartTime,
           applicationsEndTime: round.applicationsEndTime,
           roundStartTime: round.roundStartTime,

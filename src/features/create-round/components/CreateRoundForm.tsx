@@ -10,9 +10,10 @@ import { roundFormConfig, RoundSchema } from "schemas/round";
 import { ImageUpload, useIsUploading } from "components/ImageUpload";
 import { Form, FormControl, Input, Textarea } from "components/Form";
 
-import { useCreateRound } from "../hooks/useCreateRound";
+import { useCreateRound, useDeployPayout } from "../hooks/useCreateRound";
 
 const testRound = RoundSchema.parse({
+  // payoutStrategy: null,
   roundMeta: {
     title: "Test Round",
     description: "Test Round description",
@@ -58,7 +59,6 @@ export const CreateRoundForm = () => {
       schema={RoundSchema}
       onSubmit={(values) => {
         console.log(values);
-        create.mutate(values);
       }}
     >
       <ImageUpload name="bannerImg">
@@ -84,6 +84,7 @@ export const CreateRoundForm = () => {
             {JSON.stringify(create.error, null, 2)}
           </pre>
         ) : null}
+
         <FormControl name="roundMeta.title" label="Project title">
           <Input placeholder="Round name..." {...roundFormConfig.title} />
         </FormControl>
